@@ -6,13 +6,16 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/joho/godotenv"
-
 	"Credis/platform/authenticator"
 	"Credis/platform/router"
+	"Credis/web/app/db"
+
+	"github.com/joho/godotenv"
 )
 
 func main() {
+	db.Connect()
+	defer db.Disconnect()
 	if err := godotenv.Load(); err != nil {
 		log.Fatalf("Failed to load the env vars: %v", err)
 	}
