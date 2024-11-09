@@ -11,9 +11,11 @@ import (
 	"github.com/gin-gonic/gin"
 
 	"Credis/platform/authenticator"
+	"Credis/web/app/attestations"
 	"Credis/web/app/callback"
 	"Credis/web/app/login"
 	"Credis/web/app/logout"
+	"Credis/web/app/upload"
 	"Credis/web/app/user"
 )
 
@@ -41,6 +43,9 @@ func New(auth *authenticator.Authenticator) *gin.Engine {
 	router.GET("/callback", callback.Handler(auth))
 	router.GET("/user", user.Handler)
 	router.GET("/logout", logout.Handler)
+	router.POST("/upload", upload.UploadFile)
 
+	// Create attestation endpoint (requires file URL reference)
+	router.POST("/attestations", attestations.CreateAttestation)
 	return router
 }

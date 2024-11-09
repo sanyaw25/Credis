@@ -1,6 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Attestation</title>
+</head>
+<body>
+    <h1>Create an Attestation</h1>
+    
+    <form id="attestationForm" enctype="multipart/form-data">
+        <label for="file">Upload PDF:</label>
+        <input type="file" id="file" name="file" accept="application/pdf" required><br><br>
 
+        <button type="submit">Submit Attestation</button>
+    </form>
 
-<div>
-    <img class="avatar" src="{{ .picture }}"/>
-    <h2>Welcome {{.nickname}}</h2>
-</div>
+    <script>
+        document.getElementById("attestationForm").onsubmit = async function (event) {
+            event.preventDefault();
+
+            // Get user nickname (adjust depending on how you pass this information)
+            const nickname = "{{.nickname}}" ; // Replace with dynamic nickname (e.g., from token or session)
+
+            // First, upload the file
+            const fileInput = document.getElementById("file");
+            const formData = new FormData();
+            formData.append("file", fileInput.files[0]);
+
+            const uploadResponse = await fetch("/upload", {
+                method: "POST",
+                body: formData
+            });
+
+            if (uploadResponse.ok) {
+                const data = await uploadResponse.json();
+                const fileURL = data.file_url; // Get the uploaded file URL
+
+                // Now, create the attestation (this part happens automatically in the handler now)
+                alert("Attestation created successfully!");
+            } else {
+                alert("File upload failed");
+            }
+        }
+    </script>
+</body>
+</html>
