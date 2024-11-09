@@ -41,9 +41,6 @@ func New(auth *authenticator.Authenticator) *gin.Engine {
 		ctx.HTML(http.StatusOK, "login_choice.html", nil)
 	})
 
-	router.GET("/dashboard", func(ctx *gin.Context) {
-		ctx.HTML(http.StatusOK, "dashboard.html", nil)
-	})
 	router.GET("/login", login.Handler(auth))
 	router.GET("/callback", callback.Handler(auth))
 	router.GET("/user", user.Handler)

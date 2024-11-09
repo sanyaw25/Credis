@@ -3,26 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Attestation</title>
+    <title>Dashboard & Create Attestation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/public/css/user_style.css">
 </head>
 <body>
-    <h1>Create an Attestation</h1>
-    
-    <form id="attestationForm" enctype="multipart/form-data">
-        <label for="file">Upload PDF:</label>
-        <input type="file" id="file" name="file" accept="application/pdf" required><br><br>
 
-        <button type="submit">Submit Attestation</button>
-    </form>
+    <!-- Header -->
+    <header>
+        <div class="navbar">
+            <h1 class="logo">Credis</h1>
+            <button onclick="location.href='/logout'" class="cta-btn">Logout</button>
+        </div>
+    </header>
+
+    <!-- Dashboard Section -->
+    <div class="dashboard">
+        <section class="profile">
+            <h2>User Profile</h2>
+            <p>Name: {{.nickname}}</p>
+            <p>Email: {{.name}}</p>
+        </section>
+    </div>
+
+    <!-- Create Attestation Section -->
+    <div class="attestation">
+        <h1>Upload File</h1>
+        
+        <form id="attestationForm" enctype="multipart/form-data">
+            <label for="file">Upload PDF:</label>
+            <input type="file" id="file" name="file" accept="application/pdf" required><br><br>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
 
     <script>
+        // Form submission script
         document.getElementById("attestationForm").onsubmit = async function (event) {
             event.preventDefault();
 
-            // Get user nickname (adjust depending on how you pass this information)
-            const nickname = "{{.nickname}}" ; // Replace with dynamic nickname (e.g., from token or session)
+            const nickname = "{{.nickname}}"; // Adjust to dynamically insert nickname
 
-            // First, upload the file
+            // Upload the file
             const fileInput = document.getElementById("file");
             const formData = new FormData();
             formData.append("file", fileInput.files[0]);
@@ -36,7 +58,6 @@
                 const data = await uploadResponse.json();
                 const fileURL = data.file_url; // Get the uploaded file URL
 
-                // Now, create the attestation (this part happens automatically in the handler now)
                 alert("Attestation created successfully!");
             } else {
                 alert("File upload failed");
