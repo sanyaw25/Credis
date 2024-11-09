@@ -17,46 +17,103 @@
                 <ul>
                     <li><a href="#features">Features</a></li>
                     <li><a href="#how-it-works">How It Works</a></li>
-                    <li><a href="#contact">Contact Us</a></li>
+                    <li><a href="#process-tracker">Process Tracker</a></li>
+                    <li><a href="#stats">Statistics</a></li>
                 </ul>
             </nav>
             <div class="top-buttons">
                 <button onclick="location.href='/login_choice'" class="login-btn">Login</button>
-                
             </div>
         </div>
     </header>
 
-    <!-- Hero Section -->
+    <!-- Hero Section with Background Shapes -->
     <section class="hero">
+        <div class="hero-bg-shape"></div>
         <div class="hero-content">
-            <h2>Welcome to Credis</h2>
-            <p>Your Trusted AI-Based Solution for Quick and Secure Credit Transfers</p>
+            <h2>Streamline Your Credit Transfers with Credis</h2>
+            <p>Effortless, secure, and AI-powered credit transfers tailored for students.</p>
             <button onclick="location.href='/login_choice'" class="cta-btn">Get Started</button>
         </div>
     </section>
 
-    <!-- Features Section -->
+    <!-- Features Section with Background Shapes -->
     <section id="features" class="features">
-        <h3>Features</h3>
-        <ul>
-            <li>Instant, secure credit transfers powered by AI</li>
-            <li>Automated fraud detection</li>
-            <li>Personalized transfer recommendations</li>
-        </ul>
+        <div class="features-bg-shape"></div>
+        <h3>Features That Set Us Apart</h3>
+        <div class="feature-list">
+            <div class="feature-item">
+                <img src="path/to/image1.jpg" alt="Feature Image 1" class="feature-img">
+                <h4>Instant, Secure Transfers</h4>
+                <p>Seamless credit transfers with AI-backed security protocols.</p>
+            </div>
+            <div class="feature-item">
+                <img src="path/to/image2.jpg" alt="Feature Image 2" class="feature-img">
+                <h4>Fraud Detection System</h4>
+                <p>Enhanced fraud prevention for secure, authentic transactions.</p>
+            </div>
+            <div class="feature-item">
+                <img src="path/to/image3.jpg" alt="Feature Image 3" class="feature-img">
+                <h4>Customized Recommendations</h4>
+                <p>Get the best credit transfer options tailored to your academic needs.</p>
+            </div>
+        </div>
     </section>
 
     <!-- How It Works Section -->
     <section id="how-it-works" class="how-it-works">
         <h3>How It Works</h3>
-        <ul>
-            <li><strong>Upload Transcript:</strong> Upload your academic transcript in PDF format.</li>
-            <li><strong>AI-powered Course Matching:</strong> We analyze your courses and match them with available options.</li>
-            <li><strong>Recommendations:</strong> Receive personalized credit transfer suggestions.</li>
-        </ul>
+        <div class="story-steps">
+            <div class="step">
+                <div class="icon-circle">1</div>
+                <p><strong>Upload Your Transcript</strong></p>
+                <p>Upload a PDF transcript, and we handle the rest.</p>
+            </div>
+            <div class="step">
+                <div class="icon-circle">2</div>
+                <p><strong>AI Matching</strong></p>
+                <p>Our AI scans your courses, matching them to relevant credit options.</p>
+            </div>
+            <div class="step">
+                <div class="icon-circle">3</div>
+                <p><strong>Receive Suggestions</strong></p>
+                <p>Get instant, personalized recommendations for transferring credits.</p>
+            </div>
+        </div>
     </section>
 
-    <!-- Footer Section -->
+    <!-- Process Tracker Section -->
+    <section id="process-tracker" class="process-tracker">
+        <h3>Your Credit Transfer Journey</h3>
+        <div class="tracker">
+            <div class="tracker-step completed">Upload</div>
+            <div class="tracker-step">Processing</div>
+            <div class="tracker-step">Matching</div>
+            <div class="tracker-step">Review</div>
+            <div class="tracker-step">Complete</div>
+        </div>
+    </section>
+
+    <!-- Stats Section with Animated Counters -->
+    <section id="stats" class="stats">
+        <h3>Trusted by Thousands of Students</h3>
+        <div class="stats-list">
+            <div class="stat-item">
+                <span class="count" data-count="5000">0</span>
+                <p>Successful Transfers</p>
+            </div>
+            <div class="stat-item">
+                <span class="count" data-count="98">0</span>%
+                <p>Accuracy in Course Matching</p>
+            </div>
+            <div class="stat-item">
+                <span class="count" data-count="250">0</span>
+                <p>Institutions Supported</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
     <footer>
         <p>&copy; 2024 Credis. All rights reserved.</p>
     </footer>
