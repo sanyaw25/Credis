@@ -1,68 +1,235 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard & Create Attestation</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/public/css/user_style.css">
-</head>
-<body>
+/* General Styling */
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #2980b9, #34495e); /* Static Blue Gradient */
+    color: #333;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 100vh;
+}
 
-    <!-- Header -->
-    <header>
-        <div class="navbar">
-            <h1 class="logo">Credis</h1>
-            <button onclick="location.href='/logout'" class="cta-btn">Logout</button>
-        </div>
-    </header>
+/* Header */
+header {
+    width: 100%;
+    background: transparent;
+    color: #fff;
+    padding: 12px 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+}
 
-    <!-- Dashboard Section -->
-    <div class="dashboard">
-        <section class="profile">
-            <h2>User Profile</h2>
-            <p>Name: {{.nickname}}</p>
-            <p>Email: {{.name}}</p>
-        </section>
-    </div>
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
 
-    <!-- Create Attestation Section -->
-    <div class="attestation">
-        <h1>Upload File</h1>
-        
-        <form id="attestationForm" enctype="multipart/form-data">
-            <label for="file">Upload PDF:</label>
-            <input type="file" id="file" name="file" accept="application/pdf" required><br><br>
-            <button type="submit">Submit</button>
-        </form>
-    </div>
+.logo {
+    font-size: 1.7em;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
 
-    <script>
-        // Form submission script
-        document.getElementById("attestationForm").onsubmit = async function (event) {
-            event.preventDefault();
+.cta-btn {
+    padding: 10px 20px;
+    font-size: 14px;
+    color: #fff;
+    background-color: #e74c3c;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s ease-in-out;
+}
 
-            const nickname = "{{.nickname}}"; // Adjust to dynamically insert nickname
+.cta-btn:hover {
+    background-color: #c0392b;
+    transform: scale(1.05);
+}
 
-            // Upload the file
-            const fileInput = document.getElementById("file");
-            const formData = new FormData();
-            formData.append("file", fileInput.files[0]);
+/* Logout Button Styling */
+.logout-btn {
+    margin-left: auto; /* Pushes the button to the right */
+    padding: 10px 20px;
+    font-size: 14px;
+    color: #fff;
+    background-color: #e74c3c;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s ease-in-out;
+}
 
-            const uploadResponse = await fetch("/upload", {
-                method: "POST",
-                body: formData
-            });
+.logout-btn:hover {
+    background-color: #c0392b;
+    transform: scale(1.05);
+}
 
-            if (uploadResponse.ok) {
-                const data = await uploadResponse.json();
-                const fileURL = data.file_url; // Get the uploaded file URL
+/* Main Content Container */
+.content-container {
+    display: flex;
+    max-width: 1000px;
+    width: 100%;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 30px;
+    padding: 60px 30px 30px; /* Reduced top padding */
+    position: relative;
+    margin-top: 60px;
+    box-sizing: border-box;
+}
 
-                alert("Attestation created successfully!");
-            } else {
-                alert("File upload failed");
-            }
-        }
-    </script>
-</body>
-</html>
+/* Profile Section */
+.profile {
+    width: 45%;
+    color: #34495e;
+    padding: 25px;
+    border-radius: 12px;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.profile h2 {
+    font-size: 1.6em;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: #2980b9;
+}
+
+.profile-picture {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 15px;
+}
+
+.profile-picture img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.profile-picture button {
+    padding: 8px 14px;
+    font-size: 14px;
+    color: #fff;
+    background-color: #2980b9;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s ease-in-out;
+}
+
+.profile-picture button:hover {
+    background-color: #2574a9;
+    transform: scale(1.1);
+    box-shadow: 0 0 10px rgba(41, 128, 185, 0.7);
+}
+
+.profile p {
+    font-size: 1em;
+    margin: 8px 0;
+    color: #555;
+}
+
+/* Divider Line */
+.divider {
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(180deg, #4CAF50, transparent);
+    opacity: 0.15;
+}
+
+/* File Upload Section */
+.attestation {
+    width: 45%;
+    padding: 25px;
+    color: #34495e;
+    border-radius: 12px;
+    background: #fff;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin-right:10px;
+}
+
+.attestation h2 {
+    font-size: 1.5em;
+    font-weight: 600;
+    color: #34495e;
+    margin-bottom: 12px;
+}
+
+.attestation label {
+    font-size: 1em;
+    color: #555;
+    margin-bottom: 10px;
+
+}
+
+.attestation form {
+    width: 100%;
+    margin-top: 12px;
+    margin-right:10px;
+}
+
+button[type="submit"] {
+    padding: 12px 20px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #2980b9;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s ease-in-out;
+}
+
+button[type="submit"]:hover {
+    background-color: #2574a9;
+    transform: scale(1.05);
+    box-shadow: 0 0 10px rgba(41, 128, 185, 0.7);
+}
+
+input[type="file"] {
+    display: block;
+    margin-top: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius:10px;
+    background-color: #fafafa;
+    width: 98%;
+    margin-bottom: 15px; /* Added bottom margin after Browse */
+}
+
+/* Hover Effects for Cards */
+.profile:hover, .attestation:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* Add some breathing room */
+body {
+    padding-top: 40px; /* Reduced space after header */
+}
