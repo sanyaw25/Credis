@@ -41,7 +41,7 @@ func UploadFile(c *gin.Context) {
 	}
 
 	// Save the attestation to MongoDB
-	collection := db.Client.Database("your_database").Collection("attestations")
+	collection := db.Client.Database("attestations").Collection("attestation")
 	_, err = collection.InsertOne(c, attestation)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to insert attestation into MongoDB"})
