@@ -1,13 +1,14 @@
-<!-- web/template/home.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Credis - AI-Based Credit Transfer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/public/css/styles.css">
 </head>
 <body>
+
     <!-- Navbar Section -->
     <header>
         <div class="navbar">
@@ -19,7 +20,10 @@
                     <li><a href="#contact">Contact Us</a></li>
                 </ul>
             </nav>
-            <button onclick="location.href='/login'" class="login-btn">Login</button>
+            <div class="top-buttons">
+                <button onclick="location.href='/login'" class="login-btn">Login</button>
+                
+            </div>
         </div>
     </header>
 
@@ -45,22 +49,17 @@
     <!-- How It Works Section -->
     <section id="how-it-works" class="how-it-works">
         <h3>How It Works</h3>
-        <p>Credis leverages AI technology to ensure fast and secure credit transfers. Our AI-based fraud detection system analyzes every transaction, ensuring your money is always safe.</p>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="contact">
-        <h3>Contact Us</h3>
-        <p>Email: support@credisapp.com</p>
-        <p>Phone: +1 (555) 123-4567</p>
+        <ul>
+            <li><strong>Upload Transcript:</strong> Upload your academic transcript in PDF format.</li>
+            <li><strong>AI-powered Course Matching:</strong> We analyze your courses and match them with available options.</li>
+            <li><strong>Recommendations:</strong> Receive personalized credit transfer suggestions.</li>
+        </ul>
     </section>
 
     <!-- Footer Section -->
     <footer>
         <p>&copy; 2024 Credis. All rights reserved.</p>
     </footer>
+
 </body>
 </html>
-
-
-
