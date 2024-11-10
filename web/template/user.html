@@ -9,7 +9,6 @@
 </head>
 <body>
 
-    <!-- Header -->
     <header>
         <div class="navbar">
             <h1 class="logo">Credis</h1>
@@ -17,10 +16,8 @@
         </div>
     </header>
 
-    <!-- Main Content Section -->
     <div class="content-container">
         
-        <!-- User Profile Section -->
         <section class="profile">
             <h2>User Profile</h2>
             <div class="profile-picture">
@@ -31,10 +28,8 @@
             <p><strong>Email:</strong> {{.name}}</p>
         </section>
 
-        <!-- Divider Line -->
         <div class="divider"></div>
 
-        <!-- File Upload Section -->
         <section class="attestation">
             <h2>Upload File</h2>
             <form id="attestationForm" enctype="multipart/form-data">
@@ -57,10 +52,8 @@
             const formData = new FormData();
             formData.append("file", fileInput.files[0]);
     
-            // Upload the file
             const uploadResponse = await fetch("/upload", { method: "POST", body: formData });
             if (uploadResponse.ok) {
-                // Start checking for the output file after a brief delay
                 checkOutputFile();
             } else {
                 alert("File upload failed!");
@@ -68,22 +61,20 @@
         };
     
         async function checkOutputFile() {
-            // Periodically check if the output.txt file is ready
             const intervalId = setInterval(async () => {
                 const response = await fetch("/check-output");
                 const result = await response.json();
     
                 if (result.status === "File ready") {
-                    // Display the content of the output.txt file
                     document.querySelector('.attestation').innerHTML += `
                         <h2>Generated Output</h2>
                         <pre>${result.content}</pre>
                     `;
-                    clearInterval(intervalId); // Stop checking
+                    clearInterval(intervalId);
                 } else {
-                    console.log(result.status); // Log status (could be "File not yet ready")
+                    console.log(result.status);
                 }
-            }, 5000); // Check every 5 seconds
+            }, 5000);
         }
     </script>
     

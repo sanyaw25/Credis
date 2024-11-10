@@ -26,9 +26,9 @@ func main() {
 
 	rtr := router.New(auth)
 
-	log.Print("HTTP server is listening on port localhost:3000...")
+	log.Print("HTTP server is listening on port 192:3000...")
 
-	if err := http.ListenAndServe(":3000", rtr); err != nil {
+	if err := http.ListenAndServe("192.168.56.1:3000", rtr); err != nil {
 		log.Fatalf("Failed to start HTTP server: %v", err)
 	}
 

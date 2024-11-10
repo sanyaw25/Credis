@@ -1,4 +1,4 @@
-/* General Styling */
+
 body {
     font-family: 'Poppins', sans-serif;
     background: linear-gradient(135deg, #2980b9, #34495e); /* Static Blue Gradient */
@@ -84,7 +84,7 @@ header {
     justify-content: space-between;
     align-items: flex-start;
     gap: 30px;
-    padding: 60px 30px 30px; /* Reduced top padding */
+    padding: 60px 30px 30px; /* Reduced top padding
     position: relative;
     margin-top: 60px;
     box-sizing: border-box;

@@ -1,5 +1,3 @@
-// web/app/user/user.go
-
 package user
 
 import (
@@ -9,7 +7,6 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// Handler for our logged-in user page.
 func Handler(ctx *gin.Context) {
 	session := sessions.Default(ctx)
 	profile := session.Get("profile")
