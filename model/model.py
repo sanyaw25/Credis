@@ -3,12 +3,12 @@ import faiss
 from sentence_transformers import SentenceTransformer, util
 import sys
 
-def run(test_course_code, test_description):
+def runn(test_course_code, test_description):
     # Load the sentence-transformer model for embeddings
     model = SentenceTransformer('all-MiniLM-L6-v2')  # A small, fast transformer model
 
     # Load catalog data from "course-catalog.csv" into a DataFrame
-    catalog_file = "course-catalog.csv"
+    catalog_file = "/mnt/Disk_2/hack_cbs/project/Credis/model/course-catalog.csv"
     catalog_df = pd.read_csv(catalog_file)
 
     # Handle missing descriptions by filling NaN values with an empty string
@@ -63,7 +63,7 @@ def run(test_course_code, test_description):
             
     else:
         print("No matches found.")
-        file.write("No mathc")
+        file.write("No match")
 
 
-run(sys.argv[1], sys.argv[2])
+runn(sys.argv[1], sys.argv[2])

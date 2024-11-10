@@ -5,6 +5,7 @@ import (
 	"Credis/web/app/models"
 	"fmt"
 	"net/http"
+	"os/exec"
 	"path/filepath"
 	"time"
 
@@ -46,6 +47,8 @@ func UploadFile(c *gin.Context) {
 		return
 	}
 
+	go runScript()
+
 	// Respond with the file URL, attestation details, and Python script output
 	c.JSON(http.StatusOK, gin.H{
 		"message":     "File uploaded, attestation created",
@@ -53,4 +56,12 @@ func UploadFile(c *gin.Context) {
 		"attestation": attestation,
 	})
 
+}
+
+func runScript() {
+	cmd := exec.Command("python3", "/mnt/Disk_2/hack_cbs/project/Credis/model/model.py", "CS 101", "Introduction to Computer Science")
+	err := cmd.Run()
+	if err != nil {
+		fmt.Println(err)
+	}
 }
