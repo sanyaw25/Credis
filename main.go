@@ -39,8 +39,8 @@ func main() {
 	}()
 
 	// Start the HTTPS server
-	log.Print("Server listening on https://192.168.56.1:443/")
-	if err := rtr.RunTLS("192.168.56.1:443", "server.crt", "server.key"); err != nil {
+	log.Print("Server listening on :443/")
+	if err := rtr.RunTLS(":443", "server.crt", "server.key"); err != nil {
 		log.Fatalf("Failed to start HTTPS server: %v", err)
 	}
 }

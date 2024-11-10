@@ -61,5 +61,38 @@
             else alert("File upload failed");
         }
     </script>
+
+    <!-- New Output Section -->
+    <section id="output-section" style="display:none;">
+        <h2>Output</h2>
+        <div id="output"></div>
+    </section>
+    
+    <script>
+        document.getElementById("attestationForm").onsubmit = async function (event) {
+            event.preventDefault();
+            const fileInput = document.getElementById("file");
+            const formData = new FormData();
+            formData.append("file", fileInput.files[0]);
+        
+            // Send the file to the Go server
+            const uploadResponse = await fetch("/upload", { method: "POST", body: formData });
+            if (uploadResponse.ok) {
+                const result = await uploadResponse.text(); // Get response text from the Go server
+                displayOutput(result); // Display result in the output section
+            } else {
+                alert("File upload or processing failed");
+            }
+        }
+    
+        function displayOutput(output) {
+            // Show the output section and populate it with the output text
+            const outputSection = document.getElementById("output-section");
+            const outputDiv = document.getElementById("output");
+            outputSection.style.display = "block";
+            outputDiv.innerText = output;
+        }
+    </script>
+
 </body>
 </html>
