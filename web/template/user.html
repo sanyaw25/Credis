@@ -50,17 +50,43 @@
             document.getElementById("profileImg").src = "/path/to/updated/profile.jpg";
             alert("Profile picture updated!");
         }
-
+    
         document.getElementById("attestationForm").onsubmit = async function (event) {
             event.preventDefault();
             const fileInput = document.getElementById("file");
             const formData = new FormData();
             formData.append("file", fileInput.files[0]);
+    
+            // Upload the file
             const uploadResponse = await fetch("/upload", { method: "POST", body: formData });
-            if (uploadResponse.ok) alert("File uploaded successfully!");
-            else alert("File upload failed");
+            if (uploadResponse.ok) {
+                // Start checking for the output file after a brief delay
+                checkOutputFile();
+            } else {
+                alert("File upload failed!");
+            }
+        };
+    
+        async function checkOutputFile() {
+            // Periodically check if the output.txt file is ready
+            const intervalId = setInterval(async () => {
+                const response = await fetch("/check-output");
+                const result = await response.json();
+    
+                if (result.status === "File ready") {
+                    // Display the content of the output.txt file
+                    document.querySelector('.attestation').innerHTML += `
+                        <h2>Generated Output</h2>
+                        <pre>${result.content}</pre>
+                    `;
+                    clearInterval(intervalId); // Stop checking
+                } else {
+                    console.log(result.status); // Log status (could be "File not yet ready")
+                }
+            }, 5000); // Check every 5 seconds
         }
     </script>
+    
 
 </body>
 </html>

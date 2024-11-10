@@ -56,7 +56,7 @@ def runn(test_course_code, test_description):
     file = open("output.txt","w")
     # Display matched courses
     if matched_courses:
-        file.write("Courses Found!")
+        file.write("Courses Found!\n")
         for course in matched_courses:
             print(f"Course Code: {course[0]}")
             print(f"Description: {course[1]}")

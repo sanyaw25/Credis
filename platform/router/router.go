@@ -4,7 +4,9 @@ package router
 
 import (
 	"encoding/gob"
+	"io/ioutil"
 	"net/http"
+	"os"
 
 	"github.com/gin-contrib/sessions"
 	"github.com/gin-contrib/sessions/cookie"
@@ -46,6 +48,23 @@ func New(auth *authenticator.Authenticator) *gin.Engine {
 	router.GET("/user", user.Handler)
 	router.GET("/logout", logout.Handler)
 	router.POST("/upload", upload.UploadFile)
+
+	router.GET("/check-output", func(c *gin.Context) {
+		// Check if output.txt exists
+		if _, err := os.Stat("/mnt/Disk_2/hack_cbs/project/Credis/output.txt"); os.IsNotExist(err) {
+			c.JSON(http.StatusNotFound, gin.H{"status": "File not yet ready"})
+			return
+		}
+
+		// Read the output.txt file
+		data, err := ioutil.ReadFile("/mnt/Disk_2/hack_cbs/project/Credis/output.txt")
+		if err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"error": "Could not read file"})
+			return
+		}
+
+		c.JSON(http.StatusOK, gin.H{"status": "File ready", "content": string(data)})
+	})
 
 	// Create attestation endpoint (requires file URL reference)
 	router.POST("/attestations", attestations.CreateAttestation)
