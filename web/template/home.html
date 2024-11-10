@@ -6,38 +6,7 @@
     <title>Credis - AI-Based Credit Transfer</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/public/css/styles.css">
-    <style>
-        /* Dropdown styling */
-        .dropdown {
-            position: relative;
-            display: inline-block;
-        }
 
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            right: 0;
-            background-color: #f9f9f9;
-            min-width: 150px;
-            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-            z-index: 1;
-        }
-
-        .dropdown-content a {
-            color: black;
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-        }
-
-        .dropdown-content a:hover {
-            background-color: #ddd;
-        }
-
-        .dropdown:hover .dropdown-content {
-            display: block;
-        }
-    </style>
 </head>
 <body>
 
@@ -54,7 +23,6 @@
                 </ul>
             </nav>
             <div class="top-buttons">
-                <div class="dropdown">
                     <button class="login-btn" onclick="location.href='/login'">Login</button>
                 </div>
             </div>
@@ -111,6 +79,12 @@
             </div>
         </div>
     </section>
+    <section id="hi">
+        <div class="process-image">
+            <img src="public/image/image.png" alt="Illustration of Credit Transfer Process" />
+        </div>
+    </section>
+    
 
     <section id="process-tracker" class="process-tracker">
         <h2>Your Credit Transfer Journey</h2>
@@ -121,11 +95,13 @@
             <div class="tracker-step completed">Review</div>
             <div class="tracker-step completed">Progress</div>
         </div>
-    </section>
 
+    </section>
+    
 
     <section id="stats" class="stats">
         <h3>We want to build your trust!</h3>
+        
         <div class="stats-list">
             <div class="stat-item">
                 <span class="count" data-count="5000">12k</span>
@@ -136,7 +112,7 @@
                 <p>Accuracy in Course Matching</p>
             </div>
             <div class="stat-item">
-                <span class="count" data-count="250">5143</span>
+                <span class="count" data-count="250">5,143</span>
                 <p>Institutions targetted</p>
             </div>
         </div>
