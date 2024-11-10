@@ -6,6 +6,38 @@
     <title>Credis - AI-Based Credit Transfer</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/public/css/styles.css">
+    <style>
+        /* Dropdown styling */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            right: 0;
+            background-color: #f9f9f9;
+            min-width: 150px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #ddd;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+    </style>
 </head>
 <body>
 
@@ -17,48 +49,106 @@
                 <ul>
                     <li><a href="#features">Features</a></li>
                     <li><a href="#how-it-works">How It Works</a></li>
-                    <li><a href="#contact">Contact Us</a></li>
+                    <li><a href="#process-tracker">Process Tracker</a></li>
+                    <li><a href="#stats">Statistics</a></li>
                 </ul>
             </nav>
             <div class="top-buttons">
-                <button onclick="location.href='/login'" class="login-btn">Login</button>
-                
+                <div class="dropdown">
+                    <button class="login-btn">Login</button>
+                    <div class="dropdown-content">
+                        <a href="/login_institution">Institution</a>
+                        <a href="/login">Student</a>
+                    </div>
+                </div>
             </div>
         </div>
     </header>
 
-    <!-- Hero Section -->
     <section class="hero">
+        <div class="hero-bg-shape"></div>
         <div class="hero-content">
-            <h2>Welcome to Credis</h2>
-            <p>Your Trusted AI-Based Solution for Quick and Secure Credit Transfers</p>
-            <button onclick="location.href='/login'" class="cta-btn">Get Started</button>
+            <h2>Streamline Your Credit Transfers with Credis</h2>
+            <p> Secure AI-powered credits transfer system for students</p>
+            <button onclick="location.href='/login_choice'" class="cta-btn">Get Started</button>
         </div>
     </section>
 
-    <!-- Features Section -->
+
     <section id="features" class="features">
-        <h3>Features</h3>
-        <ul>
-            <li>Instant, secure credit transfers powered by AI</li>
-            <li>Automated fraud detection</li>
-            <li>Personalized transfer recommendations</li>
-        </ul>
+        <div class="features-bg-shape"></div>
+        <h2>Unique features</h2>
+        <div class="feature-list">
+            <div class="feature-item">
+                <h4>Instant, Secure Transfers</h4>
+                <p>AI-powered Similarity search to reduce manual overview </p>
+            </div>
+            <div class="feature-item">
+                <h4>Auth0 & MongoDB</h4>
+                <p>Use of auth0 for authentication and mongoDB for data record storage</p>
+            </div>
+            <div class="feature-item">
+                <h4>User friendly interface</h4>
+                <p>Easy to understand and use, update your records and we do the rest!</p>
+            </div>
+        </div>
     </section>
 
-    <!-- How It Works Section -->
+
     <section id="how-it-works" class="how-it-works">
-        <h3>How It Works</h3>
-        <ul>
-            <li><strong>Upload Transcript:</strong> Upload your academic transcript in PDF format.</li>
-            <li><strong>AI-powered Course Matching:</strong> We analyze your courses and match them with available options.</li>
-            <li><strong>Recommendations:</strong> Receive personalized credit transfer suggestions.</li>
-        </ul>
+        <h2>How It Works?</h2>
+        <div class="story-steps">
+            <div class="step">
+                <div class="icon-circle">1</div>
+                <p><strong>Upload Your Transcript</strong></p>
+                <p>Upload a PDF transcript, and we handle the rest.</p>
+            </div>
+            <div class="step">
+                <div class="icon-circle">2</div>
+                <p><strong>AI Matching</strong></p>
+                <p>Our AI scans your courses, matching them to relevant credit options.</p>
+            </div>
+            <div class="step">
+                <div class="icon-circle">3</div>
+                <p><strong>Automated Course Lookups</strong></p>
+                <p>Universities can see matching courses found based off their course-catalog</p>
+            </div>
+        </div>
     </section>
 
-    <!-- Footer Section -->
+    <section id="process-tracker" class="process-tracker">
+        <h2>Your Credit Transfer Journey</h2>
+        <div class="tracker">
+            <div class="tracker-step completed">Upload</div>
+            <div class="tracker-step completed">Processing</div>
+            <div class="tracker-step completed">Matching</div>
+            <div class="tracker-step completed">Review</div>
+            <div class="tracker-step completed">Progress</div>
+        </div>
+    </section>
+
+
+    <section id="stats" class="stats">
+        <h3>We want to build your trust!</h3>
+        <div class="stats-list">
+            <div class="stat-item">
+                <span class="count" data-count="5000">12k</span>
+                <p>Course Catalog dataset records</p>
+            </div>
+            <div class="stat-item">
+                <span class="count" data-count="98">100</span>%
+                <p>Accuracy in Course Matching</p>
+            </div>
+            <div class="stat-item">
+                <span class="count" data-count="250">5143</span>
+                <p>Institutions targetted</p>
+            </div>
+        </div>
+    </section>
+
     <footer>
-        <p>&copy; 2024 Credis. All rights reserved.</p>
+        <p>&copy; Credits: Ayushman Agrawal Hingorani, Sanya Wadhawan
+        </p>
     </footer>
 
 </body>
