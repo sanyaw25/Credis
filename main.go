@@ -1,5 +1,3 @@
-// main.go
-
 package main
 
 import (
@@ -16,6 +14,7 @@ import (
 func main() {
 	db.Connect()
 	defer db.Disconnect()
+
 	if err := godotenv.Load(); err != nil {
 		log.Fatalf("Failed to load the env vars: %v", err)
 	}
@@ -27,8 +26,10 @@ func main() {
 
 	rtr := router.New(auth)
 
-	log.Print("Server listening on http://localhost:3000/")
-	if err := http.ListenAndServe("0.0.0.0:3000", rtr); err != nil {
-		log.Fatalf("There was an error with the http server: %v", err)
+	log.Print("HTTP server is listening on port 192:3000...")
+
+	if err := http.ListenAndServe("192.168.56.1:3000", rtr); err != nil {
+		log.Fatalf("Failed to start HTTP server: %v", err)
 	}
+
 }

@@ -1,5 +1,3 @@
-// web/app/callback/callback.go
-
 package callback
 
 import (
@@ -11,7 +9,6 @@ import (
 	"Credis/platform/authenticator"
 )
 
-// Handler for our callback.
 func Handler(auth *authenticator.Authenticator) gin.HandlerFunc {
 	return func(ctx *gin.Context) {
 		session := sessions.Default(ctx)
@@ -20,7 +17,6 @@ func Handler(auth *authenticator.Authenticator) gin.HandlerFunc {
 			return
 		}
 
-		// Exchange an authorization code for a token.
 		token, err := auth.Exchange(ctx.Request.Context(), ctx.Query("code"))
 		if err != nil {
 			ctx.String(http.StatusUnauthorized, "Failed to exchange an authorization code for a token.")
@@ -46,7 +42,6 @@ func Handler(auth *authenticator.Authenticator) gin.HandlerFunc {
 			return
 		}
 
-		// Redirect to logged in page.
 		ctx.Redirect(http.StatusTemporaryRedirect, "/user")
 	}
 }

@@ -1,10 +1,10 @@
-// platform/router/router.go
-
 package router
 
 import (
 	"encoding/gob"
+	"io/ioutil"
 	"net/http"
+	"os"
 
 	"github.com/gin-contrib/sessions"
 	"github.com/gin-contrib/sessions/cookie"
@@ -19,12 +19,9 @@ import (
 	"Credis/web/app/user"
 )
 
-// New registers the routes and returns the router.
 func New(auth *authenticator.Authenticator) *gin.Engine {
 	router := gin.Default()
 
-	// To store custom types in our cookies,
-	// we must first register them using gob.Register
 	gob.Register(map[string]interface{}{})
 
 	store := cookie.NewStore([]byte("secret"))
@@ -36,16 +33,32 @@ func New(auth *authenticator.Authenticator) *gin.Engine {
 	router.GET("/", func(ctx *gin.Context) {
 		ctx.HTML(http.StatusOK, "home.html", nil)
 	})
-	router.GET("/dashboard", func(ctx *gin.Context) {
-		ctx.HTML(http.StatusOK, "dashboard.html", nil)
+
+	router.GET("/login_choice", func(ctx *gin.Context) {
+		ctx.HTML(http.StatusOK, "login_choice.html", nil)
 	})
+
 	router.GET("/login", login.Handler(auth))
 	router.GET("/callback", callback.Handler(auth))
 	router.GET("/user", user.Handler)
 	router.GET("/logout", logout.Handler)
 	router.POST("/upload", upload.UploadFile)
 
-	// Create attestation endpoint (requires file URL reference)
+	router.GET("/check-output", func(c *gin.Context) {
+		if _, err := os.Stat("/mnt/Disk_2/hack_cbs/project/Credis/output.txt"); os.IsNotExist(err) {
+			c.JSON(http.StatusNotFound, gin.H{"status": "File not yet ready"})
+			return
+		}
+
+		data, err := ioutil.ReadFile("/mnt/Disk_2/hack_cbs/project/Credis/output.txt")
+		if err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"error": "Could not read file"})
+			return
+		}
+
+		c.JSON(http.StatusOK, gin.H{"status": "File ready", "content": string(data)})
+	})
+
 	router.POST("/attestations", attestations.CreateAttestation)
 	return router
 }

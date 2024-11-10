@@ -1,4 +1,4 @@
-/* General Styles */
+
 * {
     margin: 0;
     padding: 0;
@@ -16,14 +16,12 @@ body {
     flex-direction: column;
 }
 
-/* Header (for the username button and dropdown menu) */
 header {
     position: absolute;
     top: 20px;
     right: 20px;
 }
 
-/* Username Button styling */
 .user-btn {
     background-color: #00d2d2;
     color: white;
@@ -39,11 +37,10 @@ header {
     background-color: #00b3b3;
 }
 
-/* Dropdown menu styles */
 .dropdown-menu {
     display: none;
     position: absolute;
-    top: 40px; /* Position below the username button */
+    top: 40px; 
     right: 0;
     background-color: #333;
     border-radius: 5px;
@@ -63,12 +60,11 @@ header {
     background-color: #00d2d2;
 }
 
-/* Show the dropdown menu */
 .show {
     display: block;
 }
 
-/* Title (Credis) */
+
 .title {
     font-size: 3rem;
     font-weight: 700;
@@ -77,7 +73,6 @@ header {
     margin-bottom: 30px;
 }
 
-/* Upload button styling */
 .upload-btn {
     background-color: #00d2d2;
     color: white;

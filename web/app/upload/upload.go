@@ -5,33 +5,27 @@ import (
 	"Credis/web/app/models"
 	"fmt"
 	"net/http"
+	"os/exec"
 	"path/filepath"
 	"time"
 
 	"github.com/gin-gonic/gin"
 )
 
-// UploadFile handles the file upload and creates an attestation.
 func UploadFile(c *gin.Context) {
-	// Get user info (e.g., nickname from the context or token)
-	// For now, assuming the nickname is passed as a query parameter or header (adjust as per your auth system)
-	nickname := c.GetString("nickname") // Assuming you have middleware to set the nickname
-
-	// Upload the file using form-data
+	nickname := c.GetString("nickname")
 	file, err := c.FormFile("file")
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "File upload failed"})
 		return
 	}
 
-	// Save the file to the server's local storage
 	uploadPath := filepath.Join("uploads", time.Now().Format("2006-01-02_15-04-05")+"_"+file.Filename)
 	if err := c.SaveUploadedFile(file, uploadPath); err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Could not save file"})
 		return
 	}
 
-	// Create an attestation document using the file name and the user's nickname
 	attestation := models.Attestation{
 		UserID:          nickname,
 		AttestationType: "File Upload",
@@ -40,7 +34,6 @@ func UploadFile(c *gin.Context) {
 		FileURL:         uploadPath,
 	}
 
-	// Save the attestation to MongoDB
 	collection := db.Client.Database("attestations").Collection("attestation")
 	_, err = collection.InsertOne(c, attestation)
 	if err != nil {
@@ -48,10 +41,19 @@ func UploadFile(c *gin.Context) {
 		return
 	}
 
-	// Respond with the file URL and confirmation
+	go runScript()
+
 	c.JSON(http.StatusOK, gin.H{
-		"message":     "File uploaded and attestation created successfully!",
+		"message":     "File uploaded, attestation created",
 		"file_url":    uploadPath,
 		"attestation": attestation,
 	})
+}
+
+func runScript() {
+	cmd := exec.Command("python3", "/mnt/Disk_2/hack_cbs/project/Credis/model/model.py", "CS 101", "Introduction to Computer Science")
+	err := cmd.Run()
+	if err != nil {
+		fmt.Println(err)
+	}
 }

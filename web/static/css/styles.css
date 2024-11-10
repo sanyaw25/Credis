@@ -394,12 +394,12 @@ footer {
 }
 
 #hi .process-image {
-    margin-top: 20px; 
-    text-align: center; 
+    margin-top: 20px; /* Space between other content and the image */
+    text-align: center; /* Center the image */
 }
 
 #hi .process-image img {
-    width: 100%; 
+    width: 100%; /* Make the image fill the width of the section */
     max-width: 800px;
     height: auto; 
     border: 5px solid #007BFF; 
