@@ -3,10 +3,8 @@ package upload
 import (
 	"Credis/web/app/db"
 	"Credis/web/app/models"
-	"bytes"
 	"fmt"
 	"net/http"
-	"os/exec"
 	"path/filepath"
 	"time"
 
@@ -31,21 +29,6 @@ func UploadFile(c *gin.Context) {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Could not save file"})
 		return
 	}
-
-	// Execute the Python script with the uploaded file as input
-	cmd := exec.Command("python3", "model.py", uploadPath)
-	var out bytes.Buffer
-	cmd.Stdout = &out
-	cmd.Stderr = &out
-	err = cmd.Run()
-	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to execute Python script", "details": out.String()})
-		return
-	}
-
-	// Python script output
-	scriptOutput := out.String()
-
 	// Create an attestation document
 	attestation := models.Attestation{
 		UserID:          nickname,
@@ -65,9 +48,9 @@ func UploadFile(c *gin.Context) {
 
 	// Respond with the file URL, attestation details, and Python script output
 	c.JSON(http.StatusOK, gin.H{
-		"message":       "File uploaded, attestation created, and script executed successfully!",
-		"file_url":      uploadPath,
-		"attestation":   attestation,
-		"script_output": scriptOutput,
+		"message":     "File uploaded, attestation created",
+		"file_url":    uploadPath,
+		"attestation": attestation,
 	})
+
 }

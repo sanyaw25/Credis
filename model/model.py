@@ -53,13 +53,17 @@ def run(test_course_code, test_description):
 
     # Example usage: Find similar courses
     matched_courses = find_similar_courses(test_course_code, test_description, catalog_df, threshold=0.5)
-
+    file = open("output.txt","w")
     # Display matched courses
     if matched_courses:
         for course in matched_courses:
             print(f"Course Code: {course[0]}")
             print(f"Description: {course[1]}")
+            file.write(course[0])
+            
     else:
         print("No matches found.")
+        file.write("No mathc")
+
 
 run(sys.argv[1], sys.argv[2])
